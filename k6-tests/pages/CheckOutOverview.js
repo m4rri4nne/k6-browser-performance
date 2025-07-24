@@ -8,11 +8,9 @@ export class CheckOutOverview{
     }
 
     async confirmCheckOut(){
-        await this.chekoutOverview.textContent();
-        console.log(this.chekoutOverview.textContent());
-        await this.page.screenshot({ path: 'screenshot1.png' });
+        const checkOutOverviewTitle = await this.chekoutOverview.textContent();
         check(this.page, {
-            'CheckoutOverview': () => this.chekoutOverview.textContent() === 'Checkout: Overview',
+            'CheckoutOverview': () => checkOutOverviewTitle === "Checkout: Overview",
         })
         await this.finishButton.click();
     }
