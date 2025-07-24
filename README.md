@@ -17,7 +17,7 @@ For this tutorial, we will use the [Swag Labs](https://www.saucedemo.com) that i
 As we're talking about performance tests, our main focus here will be to capture metrics on pages that are important to end users and with them we'll define how the tests will be.
 
 Therefore, we should be concerned with collecting data from the following flow:
-- Do login 
+- Login 
 - Add items to the cart
 - Checkout
 
@@ -27,4 +27,15 @@ And for the tests, we will use two different users that are provided by the app:
 
 This way we can compare the performance between them and analyze the results. 
 
-> The file on the libs folder, was created because k6 supports remote modules via URL (as if it were a CDN), but the local editor doesn't understand this natively, as it only expects local files or Node.js modules.
+## How to run the tests 
+
+If you want to only one test, you use the command: 
+
+```bash
+ npm run test:k6 --file=fileName.js
+```
+
+To run all the tests: 
+```bash
+ npm run test:k6:all
+```
