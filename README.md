@@ -16,9 +16,9 @@ For this tutorial, we will use the [Swag Labs](https://www.saucedemo.com) that i
 
 As we're talking about performance tests, our main focus here will be to capture metrics on pages that are important to end users and with them we'll define how the tests will be.
 
-Therefore, we should be concerned with collecting data from the following pages:
-- Main, where the products are loaded
-- Add items to the basket
+Therefore, we should be concerned with collecting data from the following flow:
+- Do login 
+- Add items to the cart
 - Checkout
 
 And for the tests, we will use two different users that are provided by the app: 
