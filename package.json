@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test:k6": "k6 run k6-tests/tests/${npm_config_file}",
-    "test:k6:all": "for file in k6-tests/tests/*.js; do k6 run \"$file\"; done"
+    "test:k6:all": "for file in k6-tests/tests/*.js; do k6 run \"$file\"; done",
+    "test:k6:webdashboard": "K6_WEB_DASHBOARD=true k6 run k6-tests/tests/${npm_config_file}",
+    "test:k6:htmldashboard": "K6_WEB_DASHBOARD=true K6_WEB_DASHBOARD_EXPORT=html-report.html k6 run k6-tests/tests/${npm_config_file}"
   },
   "repository": {
     "type": "git",
