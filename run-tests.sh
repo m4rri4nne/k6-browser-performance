@@ -1,44 +1,45 @@
 #!/bin/bash
 
 set -e
+# Load environment variables from .env file
+if [ -f ".env" ]; then
+  echo "🔍 Loading environment variables from .env"
+  set -a
+  source .env
+  set +a
+else
+  echo "⚠️ No .env file found, using default environment variables or CLI variables"
+fi
 
 mkdir -p results
 
-echo "🔍 Do you want to run all tests or only one?"
-echo "1 - All tests"
-echo "2 - Only one"
-read -p "Select (1 or 2): " escolha
+run_all="${RUN_ALL:-1}"
+test_file_env="${TEST_FILE:-}"
+dashboardOption="${GENERATE_DASHBOARD:-0}"
 
 test_files=()
 
-if [ "$escolha" == "1" ]; then
+if [ "$run_all" == "1" ]; then
   test_files=(./k6-tests/tests/*.js)
-elif [ "$escolha" == "2" ]; then
-  echo "📄 Tests available:"
-  select selected_file in ./k6-tests/tests/*.js; do
-    if [ -n "$selected_file" ]; then
-      test_files=("$selected_file")
-      break
-    else
-      echo "❌ Invalid option, try again."
-    fi
-  done
+elif [ "$run_all" == "0" ]; then
+  if [ -z "$test_file_env" ]; then
+    echo "❌ TEST_FILE environment variable not found."
+    exit 1
+  elif [ ! -f "$test_file_env" ]; then
+    echo "❌ File doesn't exist: $test_file_env"
+    exit 1
+  else
+    test_files=("$test_file_env")
+  fi
 else
-  echo "❌ Invalid option."
+  echo "❌ RUN_ALL invalid variable."
   exit 1
 fi
-
-
-
-echo "📊 Do you want to generate an HTML dashboard report?"
-echo "1 - Yes"
-echo "2 - No"
-read -p "Select (1 or 2): " dashboardOption
 
 generate_dashboard=false
 if [ "$dashboardOption" == "1" ]; then
   generate_dashboard=true
-elif [ "$dashboardOption" != "2" ]; then
+elif [ "$dashboardOption" != "0" ]; then
   echo "❌ Invalid option, aborting operation..."
   exit 1
 fi
