@@ -12,10 +12,10 @@ A project to automate browser-based performance testing using k6, with the goal 
 
 ## The tests 
 
-For this tutorial, we will use the [Swag Labs](https://www.saucedemo.com) that is a simulation of an e-commerce.
+For this project, I will use the [Swag Labs](https://www.saucedemo.com) that is a simulation of an e-commerce.
 
-As we're talking about performance tests, our main focus here will be to capture metrics on pages that are important to end users and with them we'll define how the tests will be.
-
+For this project, the focus is on Browser-based loading test.
+Browser-based load testing verifies the frontend performance of an application by simulating real users using a browser to access your website.
 Therefore, we should be concerned with collecting data from the following flow:
 - Login 
 - Add items to the cart
@@ -27,15 +27,25 @@ And for the tests, we will use two different users that are provided by the app:
 
 This way we can compare the performance between them and analyze the results. 
 
-## How to run the tests 
+## How to run the tests and generate reports 
 
-If you want to only one test, you use the command: 
+Give permission: 
 
 ```bash
- npm run test:k6 --file=fileName.js
+  chmod +x run-tests.sh
 ```
 
-To run all the tests: 
+To run: 
 ```bash
- npm run test:k6:all
+  ./run-tests.sh
 ```
+
+> K6 has a limitation to run only one script per time
+
+There's a native way to get the reports from k6 executions, you need to use the parameter `K6_WEB_DASHBOARD=true` and it'll generate a report for each run.
+If you have more than one test file, k6 will generate different reports for each file.
+The bash script will be responsible to define if only one test will be executed or more than one and save each report run in the `results` folder. 
+
+> It is possible to have this report generated using Grafana, but you need to pay for it. 
+
+
