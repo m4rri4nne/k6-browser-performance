@@ -4,8 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:k6": "k6 run k6-tests/tests/${npm_config_file}",
-    "test:k6:all": "for file in k6-tests/tests/*.js; do k6 run \"$file\"; done"
   },
   "repository": {
     "type": "git",
